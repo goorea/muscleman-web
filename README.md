@@ -1,25 +1,36 @@
-# New Project
+# 근육맨 웹 애플리케이션
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+<a href="https://github.com/jhs851/muscleman-api/blob/HEAD/LICENSE">
+    <img src="https://camo.githubusercontent.com/992daabc2aa4463339825f8333233ba330dd08c57068f6faf4bb598ab5a3df2e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d4d49542d627269676874677265656e2e737667" alt="muscleman api is released under the MIT license." data-canonical-src="https://img.shields.io/badge/license-MIT-green.svg" style="max-width: 100%;">
+</a>
 
-## Available Scripts
+## 설치
+```
+$ yarn install
+or
+$ npm install
+```
 
-### npm start
+## 사용법
+```
+$ yarn start
+or
+$ npm start
+```
 
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+## 빌드
+```
+$ yarn run build
+or
+$ npm run build
+```
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
+## 테스트
+```
+$ yarn test
+or
+$ npm test
+```
 
-### npm run build
-
-Builds a static copy of your site to the `build/` folder.
-Your app is ready to be deployed!
-
-**For the best production performance:** Add a build bundler plugin like "@snowpack/plugin-webpack" to your `snowpack.config.mjs` config file.
-
-### npm test
-
-Launches the application test runner.
-Run with the `--watch` flag (`npm test -- --watch`) to run in interactive watch mode.
+## 라이센스
+MIT
