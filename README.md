@@ -1,33 +1,40 @@
-# Getting Started with Create React App
+# 근육맨 API
+근육맨의 웹 애플리케이션
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<a href="https://github.com/jhs851/muscleman-api/blob/HEAD/LICENSE">
+    <img src="https://camo.githubusercontent.com/992daabc2aa4463339825f8333233ba330dd08c57068f6faf4bb598ab5a3df2e/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d4d49542d627269676874677265656e2e737667" alt="muscleman api is released under the MIT license." data-canonical-src="https://img.shields.io/badge/license-MIT-green.svg" style="max-width: 100%;">
+</a>
 
-## Available Scripts
+## 사용 가능한 스크립트입니다.
 
-In the project directory, you can run:
+프로젝트 디렉터리에서 다음을 실행할 수 있습니다.
+
+### `yarn install`
+
+의존성 패키지들을 설치합니다.
 
 ### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+앱을 개발 모드로 실행합니다.\
+브라우저에서 보려면 [http://localhost:3000](http://localhost:3000)을 엽니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+편집하면 페이지가 다시 로드됩니다.\
+또한 콘솔에 코드 스타일 오류가 표시됩니다.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+테스트 실행기를 시작합니다.\
+자세한 내용은 [테스트 실행 섹션](https://facebook.github.io/create-react-app/docs/running-tests) 을 참조하십시오.
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+프로덕션용 앱을 'build' 폴더에 빌드합니다.\
+프로덕션 모드에서 React를 올바르게 번들하고 빌드를 최적화하여 최상의 성능을 제공합니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+빌드가 최소화되고 파일 이름에 해시가 포함됩니다.\
+앱을 배포할 준비가 되었습니다!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+자세한 내용은 [배포](https://facebook.github.io/create-react-app/docs/deployment) 섹션을 참조하십시오.
 
 ### `yarn eject`
 
@@ -39,8 +46,5 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 라이센스
+MIT
