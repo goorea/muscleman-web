@@ -30,10 +30,10 @@ export default {
     port: 3000,
   },
   buildOptions: {
-    sourcemap: true,
+    // sourcemap: true,
   },
   alias: {
-    /* ... */
+    '@src': './src'
   },
   testOptions: {
     files: ["**/*.@(spec|test).*"],

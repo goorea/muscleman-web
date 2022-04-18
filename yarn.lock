@@ -9048,7 +9048,7 @@ smart-buffer@^4.2.0:
 
 snowpack@^3.8.8:
   version "3.8.8"
-  resolved "https://registry.npmjs.org/snowpack/-/snowpack-3.8.8.tgz"
+  resolved "https://registry.yarnpkg.com/snowpack/-/snowpack-3.8.8.tgz#237f1c0ad49c68313864f3aa4438db3affee0806"
   integrity sha512-Y/4V8FdzzYpwmJU2TgXRRFytz+GFSliWULK9J5O6C72KyK60w20JKqCdRtVs1S6BuobCedF5vSBD1Gvtm+gsJg==
   dependencies:
     "@npmcli/arborist" "^2.6.4"
