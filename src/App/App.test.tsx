@@ -5,6 +5,7 @@ import App from './index';
 
 it('renders learn react link', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
+  const linkElement = screen.getByText('primary');
+
   expect(linkElement).toBeInTheDocument();
 });
