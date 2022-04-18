@@ -51,10 +51,17 @@
     "@typescript-eslint/parser": "^5.19.0",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
     "prettier": "2.6.2",
     "snowpack": "^3.8.8"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "@src/(.*)$": "<rootDir>/src/$1"
+    }
   }
 }
