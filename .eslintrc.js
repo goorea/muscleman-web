@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
+    jest: true,
   },
   extends: [
     'eslint:recommended',
@@ -41,10 +42,6 @@ module.exports = {
     ],
   },
   settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      },
-    },
+    'import/resolver': 'typescript',
   },
 };
