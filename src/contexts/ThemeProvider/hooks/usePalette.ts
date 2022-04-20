@@ -6,6 +6,21 @@ const usePalette = (): PaletteOptions => {
 
   return {
     mode: prefersDarkMode ? 'dark' : 'light',
+    primary: {
+      main: '#2687ED',
+    },
+    secondary: {
+      main: '#ca71eb',
+    },
+    success: {
+      main: '#52c41a',
+    },
+    error: {
+      main: '#ff190c',
+    },
+    warning: {
+      main: '#faad14',
+    },
   };
 };
 
