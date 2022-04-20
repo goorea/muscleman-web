@@ -3,14 +3,20 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import useMockUser from '@src/hooks/useMockUser';
+import { Role } from '@src/types/graphql';
 
 import Routes from './index';
 
-jest.mock('@src/hooks/useMockUser', () => ({
-  __esModule: true,
-  default: jest.fn(),
-  useMockUser: () => ({ roles: ['ADMIN'] }),
-}));
+jest.mock('@src/hooks/useMockUser', () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { Role } = require('@src/types/graphql');
+
+  return {
+    __esModule: true,
+    default: jest.fn(),
+    useMockUser: () => ({ roles: [Role.Admin] }),
+  };
+});
 
 describe('Router 컴포넌트', () => {
   const rendered = (path: string) =>
@@ -29,7 +35,7 @@ describe('Router 컴포넌트', () => {
   });
 
   it('/trainings 경로는 TrainingsScreen을 보여준다', () => {
-    (useMockUser as jest.Mock).mockReturnValue({ roles: ['ADMIN'] });
+    (useMockUser as jest.Mock).mockReturnValue({ roles: [Role.Admin] });
 
     const { queryByText } = render(
       <MemoryRouter initialEntries={['/trainings']}>
@@ -41,7 +47,7 @@ describe('Router 컴포넌트', () => {
   });
 
   it('/trainings/create 경로는 CreateTrainingsScreen을 보여준다', () => {
-    (useMockUser as jest.Mock).mockReturnValue({ roles: ['ADMIN'] });
+    (useMockUser as jest.Mock).mockReturnValue({ roles: [Role.Admin] });
 
     const { queryByText } = rendered('/trainings/create');
 

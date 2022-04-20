@@ -1,0 +1,326 @@
+# This file was generated based on "introspection.json". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+interface Model {
+    _id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
+
+"사용자 정보와 JWT 토큰 응답"
+type AuthenticationResponse {
+    "JWT Refresh 토큰"
+    refreshToken: String!
+    "JWT 토큰"
+    token: String!
+    "사용자 정보"
+    user: User!
+}
+
+"사용자 JWT 토큰 응답"
+type JWTResponse {
+    "JWT Refresh 토큰"
+    refreshToken: String!
+    "JWT 토큰"
+    token: String!
+}
+
+type Mutation {
+    "운동종목 추가"
+    createTraining(input: CreateTrainingInput!): Training!
+    "운동계획 삭제"
+    deletePlan(_id: ObjectId!): Boolean!
+    "운동종목 삭제"
+    deleteTraining(_id: ObjectId!): Boolean!
+    "사용자 JWT 토큰 반환"
+    login(input: LoginInput!): AuthenticationResponse!
+    "여러개의 운동 계획 생성 및 수정"
+    multipleCreateOrUpdatePlans(inputs: [PlanInput!]!): [Plan!]!
+    "사용자 JWT 토큰 갱신"
+    refreshToken(deviceID: String!, refreshToken: String!): JWTResponse!
+    "사용자 생성"
+    register(input: RegisterInput!): AuthenticationResponse!
+    "사용자 이메일 인증 메일 전송"
+    sendVerifyEmail: String!
+    "소셜 로그인 사용자 생성"
+    socialLogin(input: SocialLoginInput!): AuthenticationResponse!
+    "운동종목 수정"
+    updateTraining(_id: ObjectId!, input: UpdateTrainingInput!): Boolean!
+    "사용자 이메일 인증"
+    verify(input: VerifyInput!): Boolean!
+}
+
+"운동계획 모델"
+type Plan implements Model {
+    _id: ID!
+    createdAt: DateTime!
+    "운동 날짜"
+    plannedAt: DateTime!
+    "운동종목"
+    training: Training!
+    updatedAt: DateTime!
+    "사용자"
+    user: User!
+    "볼륨"
+    volumes: [Volume!]
+}
+
+type Query {
+    "해당 필드의 주어진 값 존재 여부"
+    existUser(field: String!, value: String!): Boolean!
+    "최대 무게"
+    getOneRM(name: String!): Float!
+    "특정 사용자 조회"
+    me: User!
+    "사용자의 모든 운동 계획 조회"
+    plans: [Plan!]!
+    "운동종목 조회"
+    trainings: [Training!]!
+    "모든 사용자 조회"
+    users: [User!]!
+}
+
+"운동종목 모델"
+type Training implements Model {
+    _id: ID!
+    "분류"
+    category: TrainingCategory!
+    createdAt: DateTime!
+    "설명"
+    description: String
+    "이름"
+    name: String!
+    "선호도"
+    preference: Int
+    "썸네일 경로"
+    thumbnailPath: String
+    "종류"
+    type: TrainingType!
+    updatedAt: DateTime!
+    "운동영상 경로"
+    videoPath: String
+}
+
+"사용자 모델"
+type User implements Model {
+    _id: ID!
+    "생년월일"
+    birth: DateTime
+    createdAt: DateTime!
+    "이메일"
+    email: String!
+    "이메일 인증 토큰"
+    emailVerifyToken: String
+    "성별"
+    gender: Gender
+    "이름"
+    name: String!
+    "닉네임"
+    nickname: String!
+    "비밀번호"
+    password: String
+    "프로필 이미지 경로"
+    profileImagePath: String
+    "소셜 로그인 유형"
+    provider: SocialProvider
+    "JWT Refresh 토큰 객체 { 디바이스 ID: Refresh 토큰 }"
+    refreshToken: JSONObject
+    "권한"
+    roles: [Role!]
+    "휴대폰번호"
+    tel: String
+    updatedAt: DateTime!
+}
+
+"운동 볼륨"
+type Volume implements Model {
+    _id: ID!
+    "완료 여부"
+    complete: Boolean
+    "횟수"
+    count: Int
+    createdAt: DateTime!
+    "거리(m)"
+    distances: Float
+    "1rm"
+    oneRM: Float
+    "운동계획"
+    plan: Plan!
+    "시간(초)"
+    times: Float
+    "총 볼륨"
+    total: Float
+    updatedAt: DateTime!
+    "무게(kg)"
+    weight: Float
+}
+
+"성별"
+enum Gender {
+    FEMALE
+    MALE
+}
+
+"권한"
+enum Role {
+    ADMIN
+    VERIFIED
+}
+
+"SNS 로그인 유형"
+enum SocialProvider {
+    APPLE
+    GOOGLE
+    KAKAO
+    NAVER
+}
+
+"운동분류"
+enum TrainingCategory {
+    CALISTHENICS
+    CARDIOVASCULAR
+    WEIGHT
+}
+
+"운동종류"
+enum TrainingType {
+    ABDOMINAL
+    ARM
+    BACK
+    CARDIOVASCULAR
+    CHEST
+    ETC
+    LOWER
+    SHOULDER
+}
+
+"The javascript `Date` as string. Type represents date and time as the ISO Date string."
+scalar DateTime
+
+"The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."
+scalar JSONObject
+
+"Mongoose의 ObjectID 스칼라 타입"
+scalar ObjectId
+
+"운동종목 추가 입력 객체"
+input CreateTrainingInput {
+    "분류"
+    category: TrainingCategory!
+    "설명"
+    description: String
+    "이름"
+    name: String!
+    "선호도"
+    preference: Int = 1
+    "썸네일 경로"
+    thumbnailPath: String
+    "종류"
+    type: TrainingType!
+    "운동영상 경로"
+    videoPath: String
+}
+
+"사용자 JWT 토큰 입력 객체"
+input LoginInput {
+    "디바이스 ID"
+    deviceID: String!
+    "이메일"
+    email: String!
+    "비밀번호"
+    password: String!
+}
+
+"운동 계획 입력 객체"
+input PlanInput {
+    _id: ID
+    "운동 날짜"
+    plannedAt: DateTime!
+    "운동종목"
+    training: ID!
+    "볼륨"
+    volumes: [VolumeInput!]!
+}
+
+"사용자 입력 객체"
+input RegisterInput {
+    "생년월일"
+    birth: DateTime
+    "디바이스 ID"
+    deviceID: String!
+    "이메일"
+    email: String!
+    "성별"
+    gender: Gender
+    "이름"
+    name: String!
+    "닉네임"
+    nickname: String!
+    "비밀번호"
+    password: String!
+    "비밀번호 확인"
+    passwordConfirmation: String!
+    "프로필 이미지 경로"
+    profileImagePath: String
+    "휴대폰번호"
+    tel: String
+}
+
+"SNS 로그인 사용자 객체"
+input SocialLoginInput {
+    "디바이스 ID"
+    deviceID: String!
+    "이메일"
+    email: String!
+    "이름"
+    name: String!
+    "닉네임"
+    nickname: String
+    "소셜 로그인 유형"
+    provider: SocialProvider!
+}
+
+"운동종목 추가 입력 객체"
+input UpdateTrainingInput {
+    "분류"
+    category: TrainingCategory
+    "설명"
+    description: String
+    "이름"
+    name: String
+    "선호도"
+    preference: Int = 1
+    "썸네일 경로"
+    thumbnailPath: String
+    "종류"
+    type: TrainingType
+    "운동영상 경로"
+    videoPath: String
+}
+
+"사용자 이메일 인증 입력 객체"
+input VerifyInput {
+    "이메일"
+    email: String!
+    "이메일 인증 토큰"
+    emailVerifyToken: String!
+}
+
+"볼륨 입력 객체"
+input VolumeInput {
+    _id: ID
+    "완료 여부"
+    complete: Boolean
+    "횟수"
+    count: Int
+    "거리(m)"
+    distances: Float
+    "시간(초)"
+    times: Float
+    "무게(kg)"
+    weight: Float
+}

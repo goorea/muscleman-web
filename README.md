@@ -44,5 +44,9 @@
 
 프로젝트의 깃훅을 설치합니다.
 
+### `yarn run generate'
+
+GraphQL 스키마에서 코드를 생성합니다.
+
 ## 라이센스
 MIT
