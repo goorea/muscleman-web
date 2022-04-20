@@ -1,11 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 
 import App from './index';
 
-it('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText('primary');
+describe('App 컴포넌트', () => {
+  it('렌더링이 올바르게 된다', () => {
+    const { container } = render(<App />);
 
-  expect(linkElement).toBeInTheDocument();
+    expect(container).not.toBeNull();
+  });
 });
