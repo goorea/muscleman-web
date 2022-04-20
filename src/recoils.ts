@@ -1,6 +1,8 @@
 import { atom } from 'recoil';
 
-export const userState = atom<undefined>({
+import { User } from '@src/types/graphql';
+
+export const userState = atom<User | undefined>({
   key: 'userState',
   default: undefined,
 });

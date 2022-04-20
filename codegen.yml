@@ -1,0 +1,16 @@
+schema: ${APP_API_URI}
+hooks:
+  afterOneFileWrite:
+    - prettier --write
+generates:
+  src/types/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+    config:
+      disableDescriptions: true
+  introspection.json:
+    plugins:
+      - introspection
+    config:
+      minify: true
