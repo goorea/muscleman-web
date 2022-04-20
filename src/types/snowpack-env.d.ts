@@ -10,7 +10,7 @@ interface ImportMeta {
     readonly NODE_ENV: string;
     readonly SSR?: boolean | undefined;
 
-    readonly APP_VERSION: number;
+    readonly APP_VERSION: string;
     readonly APP_DUBUG: boolean;
     readonly APP_API_URI: string;
     readonly SNOWPACK_PUBLIC_APP_NAME: string;
