@@ -1,22 +1,17 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { RecoilState, useRecoilValue } from 'recoil';
 
-import useMockUser from '@src/hooks/useMockUser';
-import { Role } from '@src/types/graphql';
+import { Role, User } from '@src/types/graphql';
+import { userFactory, wrapper } from '@tests/functions';
 
 import Routes from './index';
 
-jest.mock('@src/hooks/useMockUser', () => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const { Role } = require('@src/types/graphql');
-
-  return {
-    __esModule: true,
-    default: jest.fn(),
-    useMockUser: () => ({ roles: [Role.Admin] }),
-  };
-});
+jest.mock('recoil', () => ({
+  ...jest.requireActual('recoil'),
+  useRecoilValue: jest.fn(),
+}));
 
 describe('Router 컴포넌트', () => {
   const rendered = (path: string) =>
@@ -24,10 +19,16 @@ describe('Router 컴포넌트', () => {
       <MemoryRouter initialEntries={[path]}>
         <Routes />
       </MemoryRouter>,
+      {
+        wrapper,
+      },
     );
 
   it('/login 경로는 LoginScreen을 보여준다', () => {
-    (useMockUser as jest.Mock).mockReturnValue(undefined);
+    (useRecoilValue as jest.Mock).mockImplementation(
+      ({ key }: RecoilState<User | null>) =>
+        key === 'userState' ? userFactory({ roles: [] }) : null,
+    );
 
     const { queryByText } = rendered('/login');
 
@@ -35,7 +36,10 @@ describe('Router 컴포넌트', () => {
   });
 
   it('/trainings 경로는 TrainingsScreen을 보여준다', () => {
-    (useMockUser as jest.Mock).mockReturnValue({ roles: [Role.Admin] });
+    (useRecoilValue as jest.Mock).mockImplementation(
+      ({ key }: RecoilState<User | null>) =>
+        key === 'userState' ? userFactory({ roles: [Role.Admin] }) : null,
+    );
 
     const { queryByText } = render(
       <MemoryRouter initialEntries={['/trainings']}>
@@ -47,7 +51,10 @@ describe('Router 컴포넌트', () => {
   });
 
   it('/trainings/create 경로는 CreateTrainingsScreen을 보여준다', () => {
-    (useMockUser as jest.Mock).mockReturnValue({ roles: [Role.Admin] });
+    (useRecoilValue as jest.Mock).mockImplementation(
+      ({ key }: RecoilState<User | null>) =>
+        key === 'userState' ? userFactory({ roles: [Role.Admin] }) : null,
+    );
 
     const { queryByText } = rendered('/trainings/create');
 
