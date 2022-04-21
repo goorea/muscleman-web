@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { useMockUser } from '@src/hooks/useMockUser';
+import { ToastProps } from '@src/components/Toast';
+import { toastsState, userState } from '@src/recoils';
 import { Role } from '@src/types/graphql';
 
 type P = {
@@ -9,20 +11,34 @@ type P = {
 };
 
 const Administrator: React.FC<P> = ({ children }) => {
-  const user = useMockUser();
   const location = useLocation();
-  const NavigateToLogin = (
-    <Navigate to="/login" state={{ from: location }} replace />
-  );
+  const user = useRecoilValue(userState);
+  const setToast = useSetRecoilState<ToastProps[]>(toastsState);
 
-  if (!user) {
-    return NavigateToLogin;
-  }
+  useEffect(() => {
+    if (!user) {
+      return setToast(prevState =>
+        prevState.concat({
+          message: '로그인 후에 이용 가능합니다.',
+          severity: 'error',
+        }),
+      );
+    }
 
-  if (!user.roles?.includes(Role.Admin)) {
-    // TODO: 로그아웃
+    if (!user.roles?.includes(Role.Admin)) {
+      setToast(prevState =>
+        prevState.concat({
+          message: '권한이 없습니다.',
+          severity: 'error',
+        }),
+      );
+    }
+  }, [setToast, user]);
 
-    return NavigateToLogin;
+  // TODO: 로그아웃
+
+  if (!user || !user.roles?.includes(Role.Admin)) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   return children;

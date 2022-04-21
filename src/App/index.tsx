@@ -6,6 +6,7 @@ import { RecoilRoot } from 'recoil';
 
 import client from '@src/client';
 import Routes from '@src/components/Routes';
+import Toasts from '@src/components/Toasts';
 import ThemeProvider from '@src/contexts/ThemeProvider';
 
 const App: React.FC = () => {
@@ -16,6 +17,7 @@ const App: React.FC = () => {
           <ApolloProvider client={client}>
             <CssBaseline />
             <Routes />
+            <Toasts />
           </ApolloProvider>
         </RecoilRoot>
       </ThemeProvider>

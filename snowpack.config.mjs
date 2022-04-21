@@ -32,7 +32,8 @@ export default {
     // sourcemap: true,
   },
   alias: {
-    '@src': './src'
+    '@src': './src',
+    '@tests': './tests',
   },
   testOptions: {
     files: ['**/*.@(spec|test).*'],
