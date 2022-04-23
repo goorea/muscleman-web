@@ -13,7 +13,7 @@ jest.mock('recoil', () => ({
   useRecoilValue: jest.fn(),
 }));
 
-describe('Router 컴포넌트', () => {
+describe('Routes 컴포넌트', () => {
   const rendered = (path: string) =>
     render(
       <MemoryRouter initialEntries={[path]}>
@@ -25,20 +25,15 @@ describe('Router 컴포넌트', () => {
     );
 
   it('/login 경로는 LoginScreen을 보여준다', () => {
-    (useRecoilValue as jest.Mock).mockImplementation(
-      ({ key }: RecoilState<User | null>) =>
-        key === 'userState' ? userFactory({ roles: [] }) : null,
-    );
+    const { queryByTestId } = rendered('/login');
 
-    const { queryByText } = rendered('/login');
-
-    expect(queryByText('Login Screen')).not.toBeNull();
+    expect(queryByTestId('loginScreen')).not.toBeNull();
   });
 
   it('/trainings 경로는 TrainingsScreen을 보여준다', () => {
     (useRecoilValue as jest.Mock).mockImplementation(
       ({ key }: RecoilState<User | null>) =>
-        key === 'userState' ? userFactory({ roles: [Role.Admin] }) : null,
+        key === 'userSelector' ? userFactory({ roles: [Role.Admin] }) : null,
     );
 
     const { queryByText } = render(
@@ -53,7 +48,7 @@ describe('Router 컴포넌트', () => {
   it('/trainings/create 경로는 CreateTrainingsScreen을 보여준다', () => {
     (useRecoilValue as jest.Mock).mockImplementation(
       ({ key }: RecoilState<User | null>) =>
-        key === 'userState' ? userFactory({ roles: [Role.Admin] }) : null,
+        key === 'userSelector' ? userFactory({ roles: [Role.Admin] }) : null,
     );
 
     const { queryByText } = rendered('/trainings/create');
@@ -62,16 +57,8 @@ describe('Router 컴포넌트', () => {
   });
 
   it('유효하지 않은 경로는 NotFoundScreen을 보여준다', () => {
-    const { queryByText } = rendered('/not/found');
+    const { queryByTestId } = rendered('/not/found');
 
-    expect(queryByText('404')).not.toBeNull();
-    expect(queryByText('이런! 페이지를 찾을 수 없습니다.')).not.toBeNull();
-    expect(
-      queryByText(/죄송합니다. 찾으시는 페이지가 없습니다./),
-    ).not.toBeNull();
-    expect(
-      queryByText(/만약 무언가가 고장났다고 생각되신다면 문의해주세요!/),
-    ).not.toBeNull();
-    expect(queryByText('문의하기')).not.toBeNull();
+    expect(queryByTestId('notFoundScreen')).not.toBeNull();
   });
 });

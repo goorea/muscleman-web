@@ -3,7 +3,8 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { ToastProps } from '@src/components/Toast';
-import { toastsState, userState } from '@src/recoils';
+import useLogout from '@src/hooks/useLogout';
+import { toastsState, userSelector } from '@src/recoils';
 import { Role } from '@src/types/graphql';
 
 type P = {
@@ -12,8 +13,9 @@ type P = {
 
 const Administrator: React.FC<P> = ({ children }) => {
   const location = useLocation();
-  const user = useRecoilValue(userState);
+  const user = useRecoilValue(userSelector);
   const setToast = useSetRecoilState<ToastProps[]>(toastsState);
+  const logout = useLogout();
 
   useEffect(() => {
     if (!user) {
@@ -32,10 +34,9 @@ const Administrator: React.FC<P> = ({ children }) => {
           severity: 'error',
         }),
       );
+      logout();
     }
-  }, [setToast, user]);
-
-  // TODO: 로그아웃
+  }, [logout, setToast, user]);
 
   if (!user || !user.roles?.includes(Role.Admin)) {
     return <Navigate to="/login" state={{ from: location }} replace />;
