@@ -1,6 +1,5 @@
-import Alert from '@mui/material/Alert';
-import { AlertColor } from '@mui/material/Alert/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import { Alert, Snackbar } from '@mui/material';
+import { AlertColor } from '@mui/material/Alert';
 import React from 'react';
 
 import useSnackbar from './hooks/useSnackbar';

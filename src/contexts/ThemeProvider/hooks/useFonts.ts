@@ -1,5 +1,5 @@
 import { ComponentsOverrides } from '@mui/material';
-import * as React from 'react';
+import React from 'react';
 
 import SpoqaHanSansNeoBold from '@src/assets/fonts/SpoqaHanSansNeo-Bold.ttf';
 import SpoqaHanSansNeo from '@src/assets/fonts/SpoqaHanSansNeo-Regular.ttf';

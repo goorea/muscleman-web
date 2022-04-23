@@ -1,10 +1,9 @@
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import { Button, Container, Typography } from '@mui/material';
 import React from 'react';
 
 const NotFoundScreen: React.FC = () => (
   <Container
+    data-testid="notFoundScreen"
     component="main"
     disableGutters={true}
     maxWidth={false}
