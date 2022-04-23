@@ -1,5 +1,5 @@
-import { PaletteOptions } from '@mui/material/styles/createPalette';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useMediaQuery } from '@mui/material';
+import { PaletteOptions } from '@mui/material/styles';
 
 const usePalette = (): PaletteOptions => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -20,6 +20,22 @@ const usePalette = (): PaletteOptions => {
     },
     warning: {
       main: '#faad14',
+    },
+    kakao: {
+      main: '#fee500',
+    },
+    naver: {
+      main: '#1ec800',
+    },
+    google: {
+      main: '#e1e8ee',
+    },
+    facebook: {
+      main: '#3b5999',
+    },
+    apple: {
+      main: '#000',
+      dark: '#fff',
     },
   };
 };

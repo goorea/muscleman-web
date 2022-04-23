@@ -1,13 +1,21 @@
+import { MockedProvider } from '@apollo/client/testing';
 import faker from 'faker';
 import { uniqueId } from 'lodash';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 
+import ThemeProvider from '@src/contexts/ThemeProvider';
 import { Gender, Role, User } from '@src/types/graphql';
 
 export const wrapper: React.JSXElementConstructor<{
   children: React.ReactElement;
-}> = ({ children }) => <RecoilRoot>{children}</RecoilRoot>;
+}> = ({ children }) => (
+  <MockedProvider>
+    <ThemeProvider>
+      <RecoilRoot>{children}</RecoilRoot>
+    </ThemeProvider>
+  </MockedProvider>
+);
 
 export const userFactory = (input?: Partial<User>): User => ({
   __typename: 'User',

@@ -24,24 +24,24 @@ describe('Administator 컴포넌트', () => {
     );
 
   it('사용자 정보가 없다면 login 페이지로 replace 한다', () => {
-    (useRecoilValue as jest.Mock).mockImplementation(
+    (useRecoilValue as jest.Mock).mockImplementationOnce(
       ({ key }: RecoilState<User | null>) =>
-        key === 'userState' ? userFactory({ roles: [] }) : null,
+        key === 'userSelector' ? userFactory({ roles: [] }) : null,
     );
 
-    const { queryByText } = rendered();
+    const { queryByTestId } = rendered();
 
-    expect(queryByText('Login Screen')).not.toBeNull();
+    expect(queryByTestId('loginScreen')).not.toBeNull();
   });
 
   it('사용자 정보가 있지만 ADMIN 권한을 가지고 있지 않다면 login 페이지로 replace 한다', () => {
-    (useRecoilValue as jest.Mock).mockImplementation(
+    (useRecoilValue as jest.Mock).mockImplementationOnce(
       ({ key }: RecoilState<User | null>) =>
-        key === 'userState' ? userFactory({ roles: [Role.Verified] }) : null,
+        key === 'userSelector' ? userFactory({ roles: [Role.Verified] }) : null,
     );
 
-    const { queryByText } = rendered();
+    const { queryByTestId } = rendered();
 
-    expect(queryByText('Login Screen')).not.toBeNull();
+    expect(queryByTestId('loginScreen')).not.toBeNull();
   });
 });
