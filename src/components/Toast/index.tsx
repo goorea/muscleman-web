@@ -21,7 +21,7 @@ const Toast: React.FC<ToastProps & { index: number }> = ({
       open={open}
       autoHideDuration={3000}
       onClose={handleClose}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       TransitionProps={{ onExited: handleExited }}
     >
       <Alert severity={severity} sx={{ width: '100%' }} onClose={handleClose}>
