@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes as ReactRouterRoutes } from 'react-router-dom';
 
+import Layout from '@src/components/Layout';
 import Administrator from '@src/components/Routes/middlewares/Administrator';
 import RedirectIfAdministrator from '@src/components/Routes/middlewares/RedirectIfAdministrator';
 import CreateTrainingsScreen from '@src/screens/CreateTrainingsScreen';
@@ -12,6 +13,7 @@ const Routes: React.FC = () => {
   return (
     <ReactRouterRoutes>
       <Route path="*" element={<NotFoundScreen />} />
+
       <Route
         path="/login"
         element={
@@ -20,22 +22,18 @@ const Routes: React.FC = () => {
           </RedirectIfAdministrator>
         }
       />
+
       <Route
-        path="/trainings"
+        path="/"
         element={
           <Administrator>
-            <TrainingsScreen />
+            <Layout />
           </Administrator>
         }
-      />
-      <Route
-        path="/trainings/create"
-        element={
-          <Administrator>
-            <CreateTrainingsScreen />
-          </Administrator>
-        }
-      />
+      >
+        <Route path="trainings" element={<TrainingsScreen />} />
+        <Route path="trainings/create" element={<CreateTrainingsScreen />} />
+      </Route>
     </ReactRouterRoutes>
   );
 };

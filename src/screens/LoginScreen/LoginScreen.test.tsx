@@ -12,6 +12,8 @@ import { JWTTokenState, toastsState } from '@src/recoils';
 import LoginScreen from '@src/screens/LoginScreen/index';
 import { userFactory, wrapper } from '@tests/functions';
 
+jest.unmock('recoil');
+
 describe('LoginScreen 컴포넌트', () => {
   const input = {
     email: 'john@example.com',
