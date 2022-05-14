@@ -1,4 +1,4 @@
-import ButtonGroup from '@mui/material/ButtonGroup';
+import { ButtonGroup } from '@mui/material';
 import Fab from '@mui/material/Fab';
 import { styled } from '@mui/material/styles';
 import { darken } from 'polished';
