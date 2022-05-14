@@ -24,15 +24,14 @@ const Routes: React.FC = () => {
       />
 
       <Route
-        path="/"
         element={
           <Administrator>
             <Layout />
           </Administrator>
         }
       >
-        <Route path="trainings" element={<TrainingsScreen />} />
-        <Route path="trainings/create" element={<CreateTrainingsScreen />} />
+        <Route path="/trainings" element={<TrainingsScreen />} />
+        <Route path="/trainings/create" element={<CreateTrainingsScreen />} />
       </Route>
     </ReactRouterRoutes>
   );
