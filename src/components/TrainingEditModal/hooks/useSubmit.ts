@@ -47,8 +47,11 @@ const useSubmit = () => {
           }),
         );
       },
-      onError: error =>
-        setErrorMessages(error?.graphQLErrors.map(e => e.message)),
+      onError: error => {
+        console.log(error);
+        console.log(error?.graphQLErrors);
+        setErrorMessages(error?.graphQLErrors.map(e => e.message));
+      },
     });
   };
 

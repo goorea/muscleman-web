@@ -31,7 +31,9 @@ describe('TrainingEditModal 컴포넌트', () => {
   beforeEach(() => {
     (useRecoilState as jest.Mock).mockImplementation(
       ({ key }: RecoilState<Training | null>) =>
-        key === 'editingTrainingState' ? [training, setEditingTraining] : null,
+        key === 'editingTrainingState'
+          ? [training, setEditingTraining]
+          : [null, jest.fn()],
     );
   });
 

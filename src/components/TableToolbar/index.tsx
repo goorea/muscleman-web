@@ -70,7 +70,7 @@ const TableToolbar: React.FC<P> = ({ selected, onDelete }) => {
             >
               {selected.length}개 선택
             </Typography>
-            <Tooltip title="삭제">
+            <Tooltip data-testid="deleteButton" title="삭제">
               <IconButton onClick={handleClick}>
                 <DeleteIcon />
               </IconButton>
@@ -83,13 +83,13 @@ const TableToolbar: React.FC<P> = ({ selected, onDelete }) => {
         open={open}
         onClose={handleClose}
         aria-labelledby="delete-trainings-dialog-title"
-        aria-describedby="deleete-trainings-dialog-description"
+        aria-describedby="delete-trainings-dialog-description"
       >
         <DialogTitle id="delete-trainings-dialog-title">
           정말 삭제하시겠습니까?
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="deleete-trainings-dialog-description">
+          <DialogContentText id="delete-trainings-dialog-description">
             정말 삭제하시겠습니까?
             <br />
             삭제하신 내용은 복구 할 수 없습니다.

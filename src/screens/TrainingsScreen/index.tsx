@@ -70,7 +70,7 @@ const TrainingsScreen: React.FC = () => {
           <TableBody>
             {rows.map((row, index) => {
               const isItemSelected = isSelected(row._id);
-              const labelId = `enhanced-table-checkbox-${index}`;
+              const labelId = `trainings-table-checkbox-${index}`;
 
               return (
                 <TableRow
@@ -87,6 +87,9 @@ const TrainingsScreen: React.FC = () => {
                       color="primary"
                       checked={isItemSelected}
                       inputProps={{
+                        // eslint-disable-next-line
+                        // @ts-ignore
+                        'data-testid': labelId,
                         'aria-labelledby': labelId,
                       }}
                     />
