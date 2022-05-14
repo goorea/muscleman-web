@@ -1,8 +1,10 @@
-import { render } from '@testing-library/react';
+import { MockedProvider } from '@apollo/client/testing';
+import { render, waitForElementToBeRemoved } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { RecoilState, useRecoilValue } from 'recoil';
 
+import { TRAININGS } from '@src/operations/queries/trainings';
 import { Role, User } from '@src/types/graphql';
 import { userFactory, wrapper } from '@tests/functions';
 
@@ -30,19 +32,39 @@ describe('Routes 컴포넌트', () => {
     expect(queryByTestId('loginScreen')).not.toBeNull();
   });
 
-  it('/trainings 경로는 TrainingsScreen을 보여준다', () => {
+  it('/trainings 경로는 TrainingsScreen을 보여준다', async () => {
     (useRecoilValue as jest.Mock).mockImplementation(
       ({ key }: RecoilState<User | null>) =>
         key === 'userSelector' ? userFactory({ roles: [Role.Admin] }) : null,
     );
 
-    const { queryByText } = render(
+    const { queryByTestId } = render(
       <MemoryRouter initialEntries={['/trainings']}>
-        <Routes />
+        <MockedProvider
+          mocks={[
+            {
+              request: {
+                query: TRAININGS,
+              },
+              result: {
+                data: {
+                  trainings: [],
+                },
+              },
+            },
+          ]}
+        >
+          <Routes />
+        </MockedProvider>
       </MemoryRouter>,
+      {
+        wrapper,
+      },
     );
 
-    expect(queryByText('Trainings Screen')).not.toBeNull();
+    await waitForElementToBeRemoved(() => queryByTestId('loader'));
+
+    expect(queryByTestId('trainingsScreen')).not.toBeNull();
   });
 
   it('/trainings/create 경로는 CreateTrainingsScreen을 보여준다', () => {
