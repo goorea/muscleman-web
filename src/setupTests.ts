@@ -7,4 +7,5 @@ import '@testing-library/jest-dom';
 jest.mock('recoil', () => ({
   ...jest.requireActual('recoil'),
   useRecoilValue: jest.fn(),
+  useRecoilState: jest.fn(),
 }));
