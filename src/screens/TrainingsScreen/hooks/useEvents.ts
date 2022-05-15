@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import { useDeleteTraining } from '@src/operations/mutations/deleteTraining';
+import { TRAININGS } from '@src/operations/queries/trainings';
 import {
   editingTrainingState,
   trainingsState,
@@ -27,6 +28,7 @@ const useEvents = (
           variables: {
             _id,
           },
+          refetchQueries: [{ query: TRAININGS }],
         }),
       ),
     );

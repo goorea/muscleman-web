@@ -9,6 +9,7 @@ import {
 } from '@testing-library/react';
 import dayjs from 'dayjs';
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
 import RecoilObserver from '@src/components/RecoilObserver';
@@ -46,9 +47,11 @@ describe('TrainingsScreen 컴포넌트', () => {
     render(
       <>
         <RecoilObserver node={trainingsState} onChange={onChange} />
-        <MockedProvider mocks={mocks}>
-          <TrainingsScreen />
-        </MockedProvider>
+        <MemoryRouter initialEntries={['/trainings']}>
+          <MockedProvider mocks={mocks}>
+            <TrainingsScreen />
+          </MockedProvider>
+        </MemoryRouter>
       </>,
       { wrapper },
     );

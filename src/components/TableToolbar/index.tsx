@@ -13,7 +13,9 @@ import {
   Typography,
 } from '@mui/material';
 import { alpha } from '@mui/material/styles';
+import { To } from 'history';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
 import { toastsState } from '@src/recoils';
@@ -21,9 +23,10 @@ import { toastsState } from '@src/recoils';
 type P = {
   selected: string[];
   onDelete: () => Promise<void>;
+  createTo: To;
 };
 
-const TableToolbar: React.FC<P> = ({ selected, onDelete }) => {
+const TableToolbar: React.FC<P> = ({ selected, onDelete, createTo }) => {
   const setToasts = useSetRecoilState(toastsState);
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -60,7 +63,7 @@ const TableToolbar: React.FC<P> = ({ selected, onDelete }) => {
           }),
         }}
       >
-        {selected.length > 0 && (
+        {selected.length > 0 ? (
           <>
             <Typography
               sx={{ flex: '1 1 100%' }}
@@ -76,6 +79,15 @@ const TableToolbar: React.FC<P> = ({ selected, onDelete }) => {
               </IconButton>
             </Tooltip>
           </>
+        ) : (
+          <Button
+            to={createTo}
+            variant="contained"
+            sx={{ ml: 'auto' }}
+            component={Link}
+          >
+            생성
+          </Button>
         )}
       </Toolbar>
 
