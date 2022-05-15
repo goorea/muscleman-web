@@ -38,14 +38,8 @@ describe('EditTrainingModal 컴포넌트', () => {
   });
 
   it('렌더링이 올바르게 된다', async () => {
-    const { queryByLabelText, queryByText } = rendered();
+    const { queryByText } = rendered();
 
-    expect(queryByLabelText('이름')).not.toBeNull();
-    expect(queryByText('카테고리')).not.toBeNull();
-    expect(queryByText('타입')).not.toBeNull();
-    expect(queryByLabelText('선호도')).not.toBeNull();
-    expect(queryByLabelText('썸네일 경로')).not.toBeNull();
-    expect(queryByLabelText('비디오 경로')).not.toBeNull();
     expect(queryByText('저장')).not.toBeNull();
   });
 
