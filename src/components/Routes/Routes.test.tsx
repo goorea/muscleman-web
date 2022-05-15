@@ -73,9 +73,9 @@ describe('Routes 컴포넌트', () => {
         key === 'userSelector' ? userFactory({ roles: [Role.Admin] }) : null,
     );
 
-    const { queryByText } = rendered('/trainings/create');
+    const { queryByTestId } = rendered('/trainings/create');
 
-    expect(queryByText('Create Trainings Screen')).not.toBeNull();
+    expect(queryByTestId('createTriningsScreen')).not.toBeNull();
   });
 
   it('유효하지 않은 경로는 NotFoundScreen을 보여준다', () => {

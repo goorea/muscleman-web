@@ -11,10 +11,10 @@ import {
 import dayjs from 'dayjs';
 import React from 'react';
 
+import EditTraningModal from '@src/components/EditTrainingModal';
 import Loader from '@src/components/Loader';
 import TableHeader from '@src/components/TableHeader';
 import TableToolbar from '@src/components/TableToolbar';
-import TrainingEditModal from '@src/components/TrainingEditModal';
 import {
   getTrainingCategoryForKorean,
   getTrainingTypeForKorean,
@@ -54,7 +54,11 @@ const TrainingsScreen: React.FC = () => {
 
   return (
     <div data-testid="trainingsScreen">
-      <TableToolbar selected={selected} onDelete={handleDelete} />
+      <TableToolbar
+        selected={selected}
+        onDelete={handleDelete}
+        createTo="/trainings/create"
+      />
 
       <TableContainer>
         <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
@@ -153,7 +157,7 @@ const TrainingsScreen: React.FC = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
 
-      <TrainingEditModal />
+      <EditTraningModal />
     </div>
   );
 };

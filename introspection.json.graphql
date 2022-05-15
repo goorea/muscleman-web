@@ -40,6 +40,8 @@ type Mutation {
     login(input: LoginInput!): AuthenticationResponse!
     "여러개의 운동 계획 생성 및 수정"
     multipleCreateOrUpdatePlans(inputs: [PlanInput!]!): [Plan!]!
+    "여러개의 운동종목 추가"
+    multipleCreateTrainings(inputs: [CreateTrainingInput!]!): [Training!]!
     "사용자 JWT 토큰 갱신"
     refreshToken(deviceID: String!, refreshToken: String!): JWTResponse!
     "사용자 생성"

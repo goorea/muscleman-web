@@ -3,14 +3,13 @@ import { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { ToastProps } from '@src/components/Toast';
-import { EditTrainingInput } from '@src/components/TrainingEditModal';
 import { useUpdateTraining } from '@src/operations/mutations/updateTraining';
 import { toastsState } from '@src/recoils';
 import {
   editingTrainingState,
   trainingsState,
 } from '@src/screens/TrainingsScreen/recoils';
-import { Training } from '@src/types/graphql';
+import { Training, UpdateTrainingInput } from '@src/types/graphql';
 
 const useSubmit = () => {
   const updateTraining = useUpdateTraining();
@@ -21,11 +20,11 @@ const useSubmit = () => {
   const setToast = useSetRecoilState<ToastProps[]>(toastsState);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
-  const onSubmit = async (data: EditTrainingInput) => {
+  const onSubmit = async (data: UpdateTrainingInput) => {
     await updateTraining({
       variables: {
         _id: editingTraining?._id,
-        input: { ...data, preference: Number(data.preference) },
+        input: data,
       },
       onCompleted: () => {
         setTrainings(prevTrainings =>
@@ -34,6 +33,9 @@ const useSubmit = () => {
               ? {
                   ...prevTraining,
                   ...data,
+                  name: data.name || prevTraining.name,
+                  category: data.category || prevTraining.category,
+                  type: data.type || prevTraining.type,
                   updatedAt: dayjs().toISOString(),
                 }
               : prevTraining,
@@ -47,11 +49,8 @@ const useSubmit = () => {
           }),
         );
       },
-      onError: error => {
-        console.log(error);
-        console.log(error?.graphQLErrors);
-        setErrorMessages(error?.graphQLErrors.map(e => e.message));
-      },
+      onError: error =>
+        setErrorMessages(error?.graphQLErrors.map(e => e.message)),
     });
   };
 

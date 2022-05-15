@@ -6,14 +6,14 @@ import { pick } from 'lodash';
 import React from 'react';
 import { RecoilState, useRecoilState } from 'recoil';
 
+import EditTraningModal from '@src/components/EditTrainingModal/index';
 import RecoilObserver from '@src/components/RecoilObserver';
-import TrainingEditModal from '@src/components/TrainingEditModal/index';
 import { UPDATE_TRAINING } from '@src/operations/mutations/updateTraining';
 import { trainingsState } from '@src/screens/TrainingsScreen/recoils';
 import { Training } from '@src/types/graphql';
 import { trainingFactory, wrapper } from '@tests/functions';
 
-describe('TrainingEditModal 컴포넌트', () => {
+describe('EditTrainingModal 컴포넌트', () => {
   const training = trainingFactory();
   const setEditingTraining = jest.fn();
   const onChange = jest.fn();
@@ -22,7 +22,7 @@ describe('TrainingEditModal 컴포넌트', () => {
       <>
         <RecoilObserver node={trainingsState} onChange={onChange} />
         <MockedProvider mocks={mocks}>
-          <TrainingEditModal />
+          <EditTraningModal />
         </MockedProvider>
       </>,
       { wrapper },
@@ -38,14 +38,8 @@ describe('TrainingEditModal 컴포넌트', () => {
   });
 
   it('렌더링이 올바르게 된다', async () => {
-    const { queryByLabelText, queryByText } = rendered();
+    const { queryByText } = rendered();
 
-    expect(queryByLabelText('이름')).not.toBeNull();
-    expect(queryByText('카테고리')).not.toBeNull();
-    expect(queryByText('타입')).not.toBeNull();
-    expect(queryByLabelText('선호도')).not.toBeNull();
-    expect(queryByLabelText('썸네일 경로')).not.toBeNull();
-    expect(queryByLabelText('비디오 경로')).not.toBeNull();
     expect(queryByText('저장')).not.toBeNull();
   });
 
