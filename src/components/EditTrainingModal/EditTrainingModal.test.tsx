@@ -6,14 +6,14 @@ import { pick } from 'lodash';
 import React from 'react';
 import { RecoilState, useRecoilState } from 'recoil';
 
+import EditTraningModal from '@src/components/EditTrainingModal/index';
 import RecoilObserver from '@src/components/RecoilObserver';
-import TrainingEditModal from '@src/components/TrainingEditModal/index';
 import { UPDATE_TRAINING } from '@src/operations/mutations/updateTraining';
 import { trainingsState } from '@src/screens/TrainingsScreen/recoils';
 import { Training } from '@src/types/graphql';
 import { trainingFactory, wrapper } from '@tests/functions';
 
-describe('TrainingEditModal 컴포넌트', () => {
+describe('EditTrainingModal 컴포넌트', () => {
   const training = trainingFactory();
   const setEditingTraining = jest.fn();
   const onChange = jest.fn();
@@ -22,7 +22,7 @@ describe('TrainingEditModal 컴포넌트', () => {
       <>
         <RecoilObserver node={trainingsState} onChange={onChange} />
         <MockedProvider mocks={mocks}>
-          <TrainingEditModal />
+          <EditTraningModal />
         </MockedProvider>
       </>,
       { wrapper },
