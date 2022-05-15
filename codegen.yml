@@ -1,4 +1,4 @@
-schema: ${APP_API_URI}
+schema: ${REACT_APP_APP_API_URI}
 hooks:
   afterOneFileWrite:
     - prettier --write

@@ -67,6 +67,7 @@ export type Mutation = {
   deleteTraining: Scalars['Boolean'];
   login: AuthenticationResponse;
   multipleCreateOrUpdatePlans: Array<Plan>;
+  multipleCreateTrainings: Array<Training>;
   refreshToken: JwtResponse;
   register: AuthenticationResponse;
   sendVerifyEmail: Scalars['String'];
@@ -93,6 +94,10 @@ export type MutationLoginArgs = {
 
 export type MutationMultipleCreateOrUpdatePlansArgs = {
   inputs: Array<PlanInput>;
+};
+
+export type MutationMultipleCreateTrainingsArgs = {
+  inputs: Array<CreateTrainingInput>;
 };
 
 export type MutationRefreshTokenArgs = {
