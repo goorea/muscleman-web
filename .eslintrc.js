@@ -41,6 +41,12 @@ module.exports = {
         'newlines-between': 'always',
       },
     ],
+    '@typescript-eslint/ban-ts-comment': [
+      'error',
+      {
+        'ts-ignore': 'allow-with-description',
+      },
+    ],
   },
   settings: {
     'import/resolver': 'typescript',
