@@ -21,6 +21,7 @@ import NaverIcon from '@src/components/NaverIcon';
 import { getDeviceID } from '@src/functions';
 import { useLogin } from '@src/operations/mutations/login';
 import useGoogleSignIn from '@src/screens/LoginScreen/hooks/useGoogleSignIn';
+import useKakaoSignIn from '@src/screens/LoginScreen/hooks/useKakaoSignIn';
 
 import useRules from './hooks/useRules';
 import { SocialButtonGroup, SocialFab } from './styled';
@@ -41,6 +42,7 @@ const LoginScreen: React.FC = () => {
   } = useForm<LoginFormInput>();
   const { emailRules, passwordRules } = useRules();
   const { googleSignIn } = useGoogleSignIn();
+  const { kakaoSignIn } = useKakaoSignIn();
 
   const onSubmit = async (input: LoginFormInput) => {
     await login({
@@ -149,7 +151,12 @@ const LoginScreen: React.FC = () => {
               <NaverIcon />
             </SocialFab>
 
-            <SocialFab data-testid="kakaoLogin" size="small" social="kakao">
+            <SocialFab
+              data-testid="kakaoLogin"
+              size="small"
+              social="kakao"
+              onClick={kakaoSignIn}
+            >
               <KakaoIcon />
             </SocialFab>
           </SocialButtonGroup>
