@@ -1,14 +1,14 @@
 import {
   GoogleLoginResponse,
   GoogleLoginResponseOffline,
-  useGoogleLogin,
+  useGoogleLogin as useGoogleSignin,
 } from 'react-google-login';
 
 import { getDeviceID } from '@src/functions';
 import { useSocialLoginMutation } from '@src/operations/mutations/socialLogin';
 import { SocialProvider } from '@src/types/graphql';
 
-const useGoogleSignIn = () => {
+const useGoogleLogin = () => {
   const [socialLogin] = useSocialLoginMutation();
 
   const onSuccess = (
@@ -33,18 +33,18 @@ const useGoogleSignIn = () => {
     }
   };
 
-  const { signIn } = useGoogleLogin({
+  const { signIn } = useGoogleSignin({
     clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
     onSuccess,
   });
 
-  const googleSignIn = () => {
+  const googleLogin = () => {
     signIn();
   };
 
   return {
-    googleSignIn,
+    googleLogin,
   };
 };
 
-export default useGoogleSignIn;
+export default useGoogleLogin;

@@ -14,6 +14,13 @@ import { userFactory, wrapper } from '@tests/functions';
 
 jest.unmock('recoil');
 
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: () => ({
+    pathname: 'localhost:3000/example/path',
+  }),
+}));
+
 describe('LoginScreen 컴포넌트', () => {
   const input = {
     email: 'john@example.com',

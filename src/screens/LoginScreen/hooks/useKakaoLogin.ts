@@ -9,7 +9,7 @@ import { SocialProvider } from '@src/types/graphql';
 
 declare let window: CustomWindow;
 
-const useKakaoSignIn = () => {
+const useKakaoLogin = () => {
   const [socialLogin] = useSocialLoginMutation();
 
   const loadKakaoSdk = () => {
@@ -24,7 +24,7 @@ const useKakaoSignIn = () => {
     });
   };
 
-  const kakaoSignIn = async () => {
+  const kakaoLogin = async () => {
     await loadKakaoSdk();
 
     window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
@@ -57,7 +57,7 @@ const useKakaoSignIn = () => {
       },
     });
   };
-  return { kakaoSignIn };
+  return { kakaoLogin };
 };
 
-export default useKakaoSignIn;
+export default useKakaoLogin;
