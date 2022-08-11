@@ -1,5 +1,26 @@
+interface KakaoLoginParams {
+  throughTalk: boolean;
+  persistAccessToken: boolean;
+  success: () => void;
+  fail: (kakaoError: KakaoError) => void;
+}
+
+interface KakaoRequestParams {
+  url: string;
+  success: (kakaoAccount: UserProfile) => void;
+  fail: (kakaoError: KakaoError) => void;
+}
+
 export interface CustomWindow extends Window {
-  Kakao: any;
+  Kakao?: {
+    init: (clientKey: string) => void;
+    Auth: {
+      login: (loginParams: KakaoLoginParams) => void;
+    };
+    API: {
+      request: (requestParams: KakaoRequestParams) => void;
+    };
+  };
 }
 
 interface Profile {

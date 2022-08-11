@@ -27,7 +27,7 @@ const useKakaoLogin = () => {
   const kakaoLogin = async () => {
     await loadKakaoSdk();
 
-    window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
+    window.Kakao?.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
 
     window.Kakao?.Auth.login({
       throughTalk: true,

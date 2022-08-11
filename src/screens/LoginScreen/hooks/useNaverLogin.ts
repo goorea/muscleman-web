@@ -46,8 +46,6 @@ const useNaverLogin = () => {
           });
         });
 
-        console.log('hey', response);
-
         socialLogin({
           variables: {
             input: {
