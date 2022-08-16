@@ -1,5 +1,9 @@
+import { useSetRecoilState } from 'recoil';
+
+import { ToastProps } from '@src/components/Toast';
 import { getDeviceID } from '@src/functions';
 import { useSocialLoginMutation } from '@src/operations/mutations/socialLogin';
+import { toastsState } from '@src/recoils';
 import {
   CustomWindow,
   KakaoError,
@@ -11,6 +15,7 @@ declare let window: CustomWindow;
 
 const useKakaoLogin = () => {
   const [socialLogin] = useSocialLoginMutation();
+  const setToast = useSetRecoilState<ToastProps[]>(toastsState);
 
   const loadKakaoSdk = () => {
     return new Promise(resolve => {
@@ -48,12 +53,22 @@ const useKakaoLogin = () => {
             });
           },
           fail: (e: KakaoError) => {
-            console.log('error', e);
+            setToast(prevState =>
+              prevState.concat({
+                message: e.error,
+                severity: 'error',
+              }),
+            );
           },
         });
       },
       fail: (f: KakaoError) => {
-        console.log('fail', f);
+        setToast(prevState =>
+          prevState.concat({
+            message: `카카오 로그인에 실패했습니다. (${f.error})`,
+            severity: 'error',
+          }),
+        );
       },
     });
   };
