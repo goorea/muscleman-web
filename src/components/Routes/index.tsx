@@ -14,14 +14,10 @@ const Routes: React.FC = () => {
     <ReactRouterRoutes>
       <Route path="*" element={<NotFoundScreen />} />
 
-      <Route
-        path="/login"
-        element={
-          <RedirectIfAdministrator>
-            <LoginScreen />
-          </RedirectIfAdministrator>
-        }
-      />
+      <Route element={<RedirectIfAdministrator />}>
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/oauth/naver" element={<LoginScreen />} />
+      </Route>
 
       <Route
         element={

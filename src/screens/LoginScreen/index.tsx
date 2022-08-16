@@ -20,6 +20,9 @@ import KakaoIcon from '@src/components/KakaoIcon';
 import NaverIcon from '@src/components/NaverIcon';
 import { getDeviceID } from '@src/functions';
 import { useLogin } from '@src/operations/mutations/login';
+import useGoogleLogin from '@src/screens/LoginScreen/hooks/useGoogleLogin';
+import useKakaoLogin from '@src/screens/LoginScreen/hooks/useKakaoLogin';
+import useNaverLogin from '@src/screens/LoginScreen/hooks/useNaverLogin';
 
 import useRules from './hooks/useRules';
 import { SocialButtonGroup, SocialFab } from './styled';
@@ -39,6 +42,9 @@ const LoginScreen: React.FC = () => {
     formState: { errors, isSubmitting },
   } = useForm<LoginFormInput>();
   const { emailRules, passwordRules } = useRules();
+  const { googleLogin } = useGoogleLogin();
+  const { kakaoLogin } = useKakaoLogin();
+  const { getNaverLoginLink } = useNaverLogin();
 
   const onSubmit = async (input: LoginFormInput) => {
     await login({
@@ -130,7 +136,12 @@ const LoginScreen: React.FC = () => {
           </LoadingButton>
 
           <SocialButtonGroup sx={{ mt: 2 }}>
-            <SocialFab data-testid="googleLogin" size="small" social="google">
+            <SocialFab
+              data-testid="googleLogin"
+              size="small"
+              social="google"
+              onClick={googleLogin}
+            >
               <GoogleIcon />
             </SocialFab>
 
@@ -138,11 +149,21 @@ const LoginScreen: React.FC = () => {
               <AppleIcon sx={{ color: 'background.paper' }} />
             </SocialFab>
 
-            <SocialFab data-testid="naverLogin" size="small" social="naver">
+            <SocialFab
+              data-testid="naverLogin"
+              size="small"
+              social="naver"
+              href={getNaverLoginLink()}
+            >
               <NaverIcon />
             </SocialFab>
 
-            <SocialFab data-testid="kakaoLogin" size="small" social="kakao">
+            <SocialFab
+              data-testid="kakaoLogin"
+              size="small"
+              social="kakao"
+              onClick={kakaoLogin}
+            >
               <KakaoIcon />
             </SocialFab>
           </SocialButtonGroup>
