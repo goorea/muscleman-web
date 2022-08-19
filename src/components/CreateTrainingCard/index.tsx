@@ -36,6 +36,7 @@ const CreateTrainingCard: React.ForwardRefRenderFunction<
     handleSubmit,
     control,
     formState: { errors },
+    setValue,
   } = useForm<CreateTrainingInput>({
     defaultValues: {
       name: '',
@@ -75,6 +76,7 @@ const CreateTrainingCard: React.ForwardRefRenderFunction<
           register={register}
           errors={errors}
           control={control}
+          setValue={setValue}
         />
       </CardContent>
     </Card>

@@ -70,6 +70,7 @@ const EditTraningModal: React.FC = () => {
             register={register}
             errors={errors}
             control={control}
+            setValue={setValue}
           />
 
           {errorMessages.map(message => (
