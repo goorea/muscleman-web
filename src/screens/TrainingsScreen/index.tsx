@@ -114,8 +114,26 @@ const TrainingsScreen: React.FC = () => {
                   </TableCell>
                   <TableCell>{row.description}</TableCell>
                   <TableCell align="center">{row.preference}</TableCell>
-                  <TableCell>{row.thumbnailPath}</TableCell>
-                  <TableCell>{row.videoPath}</TableCell>
+                  <TableCell>
+                    {row.thumbnailPath && (
+                      <img
+                        src={row.thumbnailPath}
+                        width={75}
+                        height={75}
+                        alt="운동 썸네일 사진"
+                      />
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {row.videoPath && (
+                      <img
+                        src={row.videoPath}
+                        width={75}
+                        height={75}
+                        alt="운동 영상 (현재는 사진)"
+                      />
+                    )}
+                  </TableCell>
                   <TableCell align="center">
                     {dayjs(row.createdAt).format('YYYY-MM-DD')}
                   </TableCell>
