@@ -21,7 +21,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint', 'prettier', 'import'],
-  ignorePatterns: ['graphql.ts', 'craco.config.js'],
+  ignorePatterns: ['graphql.ts', 'craco.config.js', 'build/*'],
   rules: {
     'prettier/prettier': 'error',
     'import/order': [

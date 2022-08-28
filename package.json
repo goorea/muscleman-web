@@ -22,7 +22,8 @@
     "react-hook-form": "7.30.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "recoil": "^0.7.2"
+    "recoil": "^0.7.2",
+    "serve": "^14.0.1"
   },
   "scripts": {
     "start": "craco start",
@@ -31,7 +32,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "prepare": "husky install",
-    "generate": "graphql-codegen -r dotenv/config --config codegen.yml"
+    "generate": "graphql-codegen -r dotenv/config --config codegen.yml",
+    "serve": "serve -s build"
   },
   "eslintConfig": {
     "extends": [
