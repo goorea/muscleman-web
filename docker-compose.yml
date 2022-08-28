@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: muscleman-nginx
+    image: nginx:alpine
+    volumes:
+      - ./etc/muscleman.kr.template:/etc/nginx/conf.d/muscleman.kr.conf
+    environment:
+      LETSENCRYPT_HOST: muscleman.kr,www.muscleman.kr,m.muscleman.kr
+      VIRTUAL_HOST: muscleman.kr,www.muscleman.kr,m.muscleman.kr
+    depends_on:
+      - node
+    networks:
+      - default
+      - proxy
+
+  node:
+    container_name: muscleman-node
+    image: node:16.14
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    working_dir: /app
+    command: sh -c "yarn install --frozen-lockfile && yarn serve"
+
+networks:
+  proxy:
+    driver: bridge
+    external: true
