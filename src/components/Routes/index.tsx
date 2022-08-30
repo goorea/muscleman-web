@@ -7,12 +7,16 @@ import RedirectIfAdministrator from '@src/components/Routes/middlewares/Redirect
 import CreateTrainingsScreen from '@src/screens/CreateTrainingsScreen';
 import LoginScreen from '@src/screens/LoginScreen';
 import NotFoundScreen from '@src/screens/NotFoundScreen';
+import PrivacyScreen from '@src/screens/Privacy';
+import TermsScreen from '@src/screens/Terms';
 import TrainingsScreen from '@src/screens/TrainingsScreen';
 
 const Routes: React.FC = () => {
   return (
     <ReactRouterRoutes>
       <Route path="*" element={<NotFoundScreen />} />
+      <Route path="/privacy" element={<PrivacyScreen />} />
+      <Route path="/terms" element={<TermsScreen />} />
 
       <Route element={<RedirectIfAdministrator />}>
         <Route path="/login" element={<LoginScreen />} />
