@@ -1,7 +1,7 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
 
-const PrivacyPolicy: React.FC = () => {
+const PrivacyScreen: React.FC = () => {
   return (
     <Container sx={{ py: 4 }}>
       <Typography variant="h4" align="center">
@@ -166,4 +166,4 @@ const PrivacyPolicy: React.FC = () => {
   );
 };
 
-export default PrivacyPolicy;
+export default PrivacyScreen;

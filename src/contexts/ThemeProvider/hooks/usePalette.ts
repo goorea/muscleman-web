@@ -21,6 +21,9 @@ const usePalette = (): PaletteOptions => {
     warning: {
       main: '#faad14',
     },
+    info: {
+      main: '#e1e8ee',
+    },
     kakao: {
       main: '#fee500',
     },
