@@ -16,7 +16,7 @@ const Routes: React.FC = () => {
   return (
     <ReactRouterRoutes>
       <Route path="*" element={<NotFoundScreen />} />
-      <Route path="/" element={<HomeScreen />} />
+      <Route index element={<HomeScreen />} />
       <Route path="/privacy" element={<PrivacyScreen />} />
       <Route path="/terms" element={<TermsScreen />} />
 
