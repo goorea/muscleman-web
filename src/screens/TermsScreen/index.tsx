@@ -1,7 +1,7 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
 
-const Terms: React.FC = () => {
+const TermsScreen: React.FC = () => {
   return (
     <Container sx={{ py: 4 }}>
       <Typography variant="h4" align="center">
@@ -485,4 +485,4 @@ const Terms: React.FC = () => {
   );
 };
 
-export default Terms;
+export default TermsScreen;
