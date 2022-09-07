@@ -22,7 +22,7 @@ const usePalette = (): PaletteOptions => {
       main: '#faad14',
     },
     info: {
-      main: '#e1e8ee',
+      main: '#272D3B',
     },
     kakao: {
       main: '#fee500',
