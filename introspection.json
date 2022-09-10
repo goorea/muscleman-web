@@ -751,14 +751,14 @@
             "description": "사용자 이메일 인증",
             "args": [
               {
-                "name": "input",
+                "name": "token",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "VerifyInput",
+                    "kind": "SCALAR",
+                    "name": "String",
                     "ofType": null
                   }
                 },
@@ -767,6 +767,18 @@
                 "deprecationReason": null
               }
             ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": { "kind": "SCALAR", "name": "Boolean", "ofType": null }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "withdrawal",
+            "description": "사용자 삭제",
+            "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1824,41 +1836,6 @@
         "interfaces": [
           { "kind": "INTERFACE", "name": "Model", "ofType": null }
         ],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "VerifyInput",
-        "description": "사용자 이메일 인증 입력 객체",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "email",
-            "description": "이메일",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "emailVerifyToken",
-            "description": "이메일 인증 토큰",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },

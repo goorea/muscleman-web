@@ -53,7 +53,9 @@ type Mutation {
     "운동종목 수정"
     updateTraining(_id: ObjectId!, input: UpdateTrainingInput!): Boolean!
     "사용자 이메일 인증"
-    verify(input: VerifyInput!): Boolean!
+    verify(token: String!): Boolean!
+    "사용자 삭제"
+    withdrawal: Boolean!
 }
 
 "운동계획 모델"
@@ -302,14 +304,6 @@ input UpdateTrainingInput {
     type: TrainingType
     "운동영상 경로"
     videoPath: String
-}
-
-"사용자 이메일 인증 입력 객체"
-input VerifyInput {
-    "이메일"
-    email: String!
-    "이메일 인증 토큰"
-    emailVerifyToken: String!
 }
 
 "볼륨 입력 객체"
