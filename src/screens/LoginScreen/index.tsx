@@ -64,7 +64,7 @@ const LoginScreen: React.FC = () => {
     <Container data-testid="loginScreen" component="main" maxWidth="xs">
       <Box
         sx={{
-          marginTop: 8,
+          mt: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

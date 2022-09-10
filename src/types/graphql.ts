@@ -74,6 +74,7 @@ export type Mutation = {
   socialLogin: AuthenticationResponse;
   updateTraining: Scalars['Boolean'];
   verify: Scalars['Boolean'];
+  withdrawal: Scalars['Boolean'];
 };
 
 export type MutationCreateTrainingArgs = {
@@ -119,7 +120,7 @@ export type MutationUpdateTrainingArgs = {
 };
 
 export type MutationVerifyArgs = {
-  input: VerifyInput;
+  token: Scalars['String'];
 };
 
 export type Plan = Model & {
@@ -250,11 +251,6 @@ export type User = Model & {
   roles?: Maybe<Array<Role>>;
   tel?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
-};
-
-export type VerifyInput = {
-  email: Scalars['String'];
-  emailVerifyToken: Scalars['String'];
 };
 
 export type Volume = Model & {

@@ -2,8 +2,9 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import Footer from '@src/components/Footer/index';
 import { wrapper } from '@tests/functions';
+
+import Footer from './index';
 
 describe('Footer 컴포넌트', () => {
   it('렌더링이 올바르게 된다', () => {
