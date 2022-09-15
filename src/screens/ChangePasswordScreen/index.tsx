@@ -1,11 +1,14 @@
 import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { Avatar, Box, Container, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
-import useChangePassword from '@src/operations/mutations/resetPassword';
+import { ToastProps } from '@src/components/Toast';
+import useChangePassword from '@src/operations/mutations/changePassword';
+import { toastsState } from '@src/recoils';
 import usePasswordRules from '@src/screens/ChangePasswordScreen/hooks/usePasswordRules';
 
 export type ChangePasswordFormInput = {
@@ -20,16 +23,13 @@ const ChangePasswordScreen: React.FC = () => {
     formState: { errors, isSubmitting },
     getValues,
   } = useForm<ChangePasswordFormInput>();
-  const [errorMessages, setErrorMessages] = useState<string[]>([]);
-  const changePassword = useChangePassword(setErrorMessages);
-
-  const validatePassword = (): boolean => {
-    return getValues('password') === getValues('passwordConfirmation');
-  };
+  const changePassword = useChangePassword();
 
   const { passwordRules, passwordConfirmationRules } =
-    usePasswordRules(validatePassword);
-  const [searchParams, setSearchParams] = useSearchParams();
+    usePasswordRules(getValues);
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const setToast = useSetRecoilState<ToastProps[]>(toastsState);
 
   const onSubmit = async ({ password }: ChangePasswordFormInput) => {
     await changePassword({
@@ -40,8 +40,24 @@ const ChangePasswordScreen: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    if (!searchParams.get('token')) {
+      navigate('/');
+      setToast(prevState =>
+        prevState.concat({
+          message: '잘못된 경로입니다.',
+          severity: 'error',
+        }),
+      );
+    }
+  }, [navigate, searchParams, setToast]);
+
   return (
-    <Container data-testid="loginScreen" component="main" maxWidth="xs">
+    <Container
+      data-testid="changePasswordScreen"
+      component="main"
+      maxWidth="xs"
+    >
       <Box
         sx={{
           mt: 8,
@@ -85,17 +101,6 @@ const ChangePasswordScreen: React.FC = () => {
             helperText={errors.passwordConfirmation?.message}
             {...register('passwordConfirmation', passwordConfirmationRules)}
           />
-          {errorMessages.map(message => (
-            <Typography
-              key={message}
-              color="error"
-              variant="body2"
-              gutterBottom={false}
-            >
-              {message}
-            </Typography>
-          ))}
-
           <LoadingButton
             type="submit"
             fullWidth

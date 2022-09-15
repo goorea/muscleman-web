@@ -1,9 +1,10 @@
 import { RegisterOptions } from 'react-hook-form';
+import { UseFormGetValues } from 'react-hook-form/dist/types/form';
 
 import { ChangePasswordFormInput } from '@src/screens/ChangePasswordScreen';
 
 const usePasswordRules = (
-  validatePassword: () => boolean,
+  getValues: UseFormGetValues<ChangePasswordFormInput>,
 ): {
   passwordRules: RegisterOptions<ChangePasswordFormInput, 'password'>;
   passwordConfirmationRules: RegisterOptions<
@@ -19,7 +20,8 @@ const usePasswordRules = (
     },
   },
   passwordConfirmationRules: {
-    validate: validatePassword,
+    validate: value =>
+      value === getValues('password') || '비밀번호와 값이 다릅니다',
   },
 });
 

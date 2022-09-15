@@ -26,7 +26,7 @@ const Routes: React.FC = () => {
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/oauth/naver" element={<LoginScreen />} />
         <Route path="/email/verify" element={<EmailVerifyScreen />} />
-        <Route path="/changepassword" element={<ChangePasswordScreen />} />
+        <Route path="/password/reset" element={<ChangePasswordScreen />} />
       </Route>
 
       <Route
