@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Model } from '@src/types/graphql';
 import { Order } from '@src/types/table';
 
+// eslint-disable-next-line
 const descendingComparator = <T extends Record<string, any>>(
   a: T,
   b: T,

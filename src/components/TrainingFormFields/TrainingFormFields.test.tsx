@@ -10,6 +10,7 @@ describe('TrainingFormFields 컴포넌트', () => {
         register={jest.fn()}
         errors={{}}
         setValue={jest.fn()}
+        watch={jest.fn()}
       />,
     );
   });
