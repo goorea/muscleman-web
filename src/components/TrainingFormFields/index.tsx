@@ -11,13 +11,15 @@ import {
   Backdrop,
 } from '@mui/material';
 import React from 'react';
-import { Controller, Path } from 'react-hook-form';
-import { FieldErrors } from 'react-hook-form/dist/types/errors';
 import {
+  Controller,
+  Path,
+  FieldErrors,
   Control,
   UseFormRegister,
   UseFormSetValue,
-} from 'react-hook-form/dist/types/form';
+  UseFormWatch,
+} from 'react-hook-form';
 
 import {
   getTrainingCategoryForKorean,
@@ -40,6 +42,7 @@ type P<T> = {
   errors: FieldErrors<T>;
   control?: Control<T>;
   setValue: UseFormSetValue<T>;
+  watch: UseFormWatch<T>;
 };
 
 function TrainingFormFields<T extends TrainingInput>({
@@ -47,6 +50,7 @@ function TrainingFormFields<T extends TrainingInput>({
   errors,
   control,
   setValue,
+  watch,
 }: P<T>) {
   const {
     nameRules,
@@ -79,16 +83,14 @@ function TrainingFormFields<T extends TrainingInput>({
         label="이름"
         autoFocus
         helperText={errors.name?.message}
-        // @ts-ignore: https://github.com/react-hook-form/react-hook-form/discussions/4807
-        {...register('name', nameRules)}
+        {...register('name' as Path<T>, nameRules)}
       />
       <InputLabel id="category-label" sx={{ mt: 1 }}>
         카테고리
       </InputLabel>
       {control && (
         <Controller
-          // @ts-ignore: https://github.com/react-hook-form/react-hook-form/discussions/4807
-          name="category"
+          name={'category' as Path<T>}
           control={control}
           rules={categoryRules}
           render={({ field }) => (
@@ -113,8 +115,7 @@ function TrainingFormFields<T extends TrainingInput>({
       </InputLabel>
       {control && (
         <Controller
-          // @ts-ignore: https://github.com/react-hook-form/react-hook-form/discussions/4807
-          name="type"
+          name={'type' as Path<T>}
           control={control}
           rules={typeRules}
           render={({ field }) => (
@@ -144,8 +145,7 @@ function TrainingFormFields<T extends TrainingInput>({
         helperText={errors.description?.message}
         multiline={true}
         type="number"
-        // @ts-ignore: https://github.com/react-hook-form/react-hook-form/discussions/4807
-        {...register('description', descriptionRules)}
+        {...register('description' as Path<T>, descriptionRules)}
       />
 
       <TextField
@@ -156,12 +156,14 @@ function TrainingFormFields<T extends TrainingInput>({
         label="선호도"
         helperText={errors.preference?.message}
         type="number"
-        // @ts-ignore: https://github.com/react-hook-form/react-hook-form/discussions/4807
-        {...register('preference', preferenceRules)}
+        {...register('preference' as Path<T>, preferenceRules)}
       />
 
       <FormControl variant="outlined" margin="normal" fullWidth>
-        <InputLabel htmlFor="outlined-adornment-thumbnail">
+        <InputLabel
+          htmlFor="outlined-adornment-thumbnail"
+          shrink={!!watch('thumbnailPath' as Path<T>)}
+        >
           썸네일 경로
         </InputLabel>
         <OutlinedInput
@@ -186,12 +188,18 @@ function TrainingFormFields<T extends TrainingInput>({
             </InputAdornment>
           }
           label="썸네일 경로"
+          notched={!!watch('thumbnailPath' as Path<T>)}
           {...register('thumbnailPath' as Path<T>)}
         />
       </FormControl>
 
       <FormControl variant="outlined" margin="normal" fullWidth>
-        <InputLabel htmlFor="outlined-adornment-video">비디오 경로</InputLabel>
+        <InputLabel
+          htmlFor="outlined-adornment-video"
+          shrink={!!watch('videoPath' as Path<T>)}
+        >
+          비디오 경로
+        </InputLabel>
         <OutlinedInput
           id="outlined-adornment-video"
           type="text"
@@ -214,6 +222,7 @@ function TrainingFormFields<T extends TrainingInput>({
             </InputAdornment>
           }
           label="비디오 경로"
+          notched={!!watch('videoPath' as Path<T>)}
           {...register('videoPath' as Path<T>)}
         />
       </FormControl>

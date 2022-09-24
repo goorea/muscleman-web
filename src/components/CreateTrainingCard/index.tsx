@@ -1,11 +1,7 @@
 import { Close as CloseIcon } from '@mui/icons-material';
 import { Card, CardContent, Fab, Tooltip } from '@mui/material';
 import React, { useImperativeHandle } from 'react';
-import { useForm } from 'react-hook-form';
-import {
-  SubmitErrorHandler,
-  SubmitHandler,
-} from 'react-hook-form/dist/types/form';
+import { useForm, SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
 
 import TrainingFormFields from '@src/components/TrainingFormFields';
 import {
@@ -37,6 +33,7 @@ const CreateTrainingCard: React.ForwardRefRenderFunction<
     control,
     formState: { errors },
     setValue,
+    watch,
   } = useForm<CreateTrainingInput>({
     defaultValues: {
       name: '',
@@ -77,6 +74,7 @@ const CreateTrainingCard: React.ForwardRefRenderFunction<
           errors={errors}
           control={control}
           setValue={setValue}
+          watch={watch}
         />
       </CardContent>
     </Card>

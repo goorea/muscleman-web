@@ -27,6 +27,7 @@ const EditTraningModal: React.FC = () => {
     setValue,
     control,
     formState: { errors, isSubmitting },
+    watch,
   } = useForm<UpdateTrainingInput>({
     defaultValues: {
       name: '',
@@ -71,6 +72,7 @@ const EditTraningModal: React.FC = () => {
             errors={errors}
             control={control}
             setValue={setValue}
+            watch={watch}
           />
 
           {errorMessages.map(message => (

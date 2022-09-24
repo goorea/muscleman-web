@@ -1,11 +1,12 @@
 import AWS from 'aws-sdk';
+import dayjs from 'dayjs';
 import { ChangeEvent, useState } from 'react';
-import { Path } from 'react-hook-form';
 import {
+  Path,
   UnpackNestedValue,
   UseFormSetValue,
-} from 'react-hook-form/dist/types/form';
-import { PathValue } from 'react-hook-form/dist/types/path';
+  PathValue,
+} from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
 
 import { ToastProps } from '@src/components/Toast';
@@ -39,11 +40,14 @@ const useBucket = <T extends TrainingInput>(
 
     if (target.files && target.files.length) {
       const file = target.files[0];
+      const splited = file.name.split('.');
+      const fileName = splited.slice(0, -1).join('.');
+      const extension = splited.slice(-1)[0];
 
       const upload = new AWS.S3.ManagedUpload({
         params: {
           Bucket: bucket,
-          Key: file.name,
+          Key: `${fileName}_${dayjs().format('YYYYMMDDHHmmss')}.${extension}`,
           Body: file,
         },
       });
