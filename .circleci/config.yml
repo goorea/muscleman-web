@@ -30,7 +30,7 @@ workflows:
           requires:
             - build-and-test
           application-name: muscleman
-          bundle-bucket: muscleman-deploy
+          bundle-bucket: muscleman-deploy2
           deployment-group: web
           bundle-key: muscleman-zip
           service-role-arn: hyungseok

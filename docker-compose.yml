@@ -2,6 +2,7 @@ version: '3'
 
 services:
   nginx:
+    restart: always
     container_name: muscleman-nginx
     image: nginx:alpine
     volumes:
@@ -16,6 +17,7 @@ services:
       - proxy
 
   node:
+    restart: always
     container_name: muscleman-node
     image: node:16.14
     ports:
@@ -28,5 +30,4 @@ services:
 
 networks:
   proxy:
-    driver: bridge
     external: true
