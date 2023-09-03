@@ -1,26 +1,39 @@
 {
   "name": "muscleman-web",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.13",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@apollo/client": "^3.5.10",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/lab": "^5.0.0-alpha.77",
+    "@mui/material": "^5.6.2",
+    "aws-sdk": "2.1194.0",
+    "crypto-js": "^4.1.1",
+    "dayjs": "^1.11.1",
+    "graphql": "^15.8.0",
+    "jquery": "3.6.0",
+    "lodash": "^4.17.21",
+    "polished": "^4.2.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-google-login": "5.2.2",
+    "react-hook-form": "7.30.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.4.2",
-    "web-vitals": "^2.1.0"
+    "recoil": "^0.7.2",
+    "serve": "^14.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "prepare": "husky install",
+    "generate": "graphql-codegen -r dotenv/config --config codegen.yml",
+    "serve": "serve -s build"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +52,50 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/plugin-syntax-flow": "^7.16.7",
+    "@babel/plugin-transform-react-jsx": "^7.17.3",
+    "@craco/craco": "^6.4.3",
+    "@graphql-codegen/cli": "2.2.0",
+    "@graphql-codegen/introspection": "^2.1.0",
+    "@graphql-codegen/typescript": "2.2.2",
+    "@graphql-codegen/typescript-operations": "2.1.6",
+    "@sentry/react": "^7.10.0",
+    "@sentry/tracing": "^7.10.0",
+    "@testing-library/dom": "7.31.2",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/crypto-js": "^4.1.1",
+    "@types/faker": "^5.5.9",
+    "@types/jest": "^27.0.1",
+    "@types/jquery": "3.5.14",
+    "@types/lodash": "^4.14.182",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.4.0",
+    "faker": "^5.5.3",
+    "husky": "^7.0.4",
+    "prettier": "2.6.2",
+    "sass": "^1.50.1",
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "@src/(.*)$": "<rootDir>/src/$1",
+      "@tests/(.*)$": "<rootDir>/tests/$1"
+    }
   }
 }

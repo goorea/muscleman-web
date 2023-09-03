@@ -1,0 +1,46 @@
+upstream node {
+    server    muscleman-node:3000;
+    keepalive 20;
+}
+
+server {
+    listen       80;
+    server_name  muscleman.kr www.muscleman.kr m.muscleman.kr;
+    root   /app/build;
+
+    charset utf-8;
+    client_max_body_size 10M;
+
+    access_log /var/log/nginx/access.log;
+    error_log  /var/log/nginx/error.log;
+
+    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-NginX-Proxy true;
+
+        proxy_pass http://node;
+        proxy_redirect off;
+    }
+
+    # Allow Lets Encrypt Domain Validation Program
+    location ^~ /.well-known/acme-challenge/ {
+        allow all;
+    }
+
+    # Block dot file (.htaccess .htpasswd .svn .git .env and so on.)
+    location ~ /\. {
+        deny all;
+    }
+
+    # Block (log file, binary, certificate, shell script, sql dump file) access.
+    location ~* \.(log|binary|pem|enc|crt|conf|cnf|sql|sh|key|yml|lock)$ {
+        deny all;
+    }
+
+    # Block access
+    location ~* (composer\.json|composer\.lock|composer\.phar|contributing\.md|license\.txt|readme\.rst|readme\.md|readme\.txt|copyright|artisan|gulpfile\.js|package\.json|phpunit\.xml|access_log|error_log|gruntfile\.js)$ {
+        deny all;
+    }
+}
